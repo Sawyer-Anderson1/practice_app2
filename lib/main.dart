@@ -19,6 +19,38 @@ class _QuoteListState extends State<QuoteList> {
     Quote("Quote3", "author3"),
   ];
 
+  Widget quoteTemplate(quote) {
+    return Card(
+      color: Colors.deepPurple[500],
+      elevation: 5.0,
+      shadowColor: Colors.deepPurple[700],
+      margin: EdgeInsets.fromLTRB(10, 15, 10, 15),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              quote.content,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+            ),
+            Text(
+              " - " + quote.author,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,21 +60,16 @@ class _QuoteListState extends State<QuoteList> {
           "Awesome Quotes",
           style: TextStyle(
             color: Colors.white,
+            fontSize: 25,
           ),
         ),
         centerTitle: true,
         backgroundColor: Colors.deepPurple[700],
       ),
-      body: Column(
-        children: quotes.map((quote) {
-          return Text(
-            quote.content + " by " + quote.author,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-          );
-        }).toList(),
+      body: Center(
+        child: Column(
+          children: quotes.map((quote) => quoteTemplate(quote)).toList(),
+        ),
       )
     );
   }
