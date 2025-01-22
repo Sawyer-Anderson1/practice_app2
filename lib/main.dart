@@ -14,12 +14,46 @@ class QuoteList extends StatefulWidget {
 
 class _QuoteListState extends State<QuoteList> {
   List<Quote> quotes = [
-    Quote("Quote1", "author1"),
-    Quote("Quote2", "author2"),
-    Quote("Quote3", "author3"),
+    Quote(content: "Quote1", author: "author1"),
+    Quote(content: "Quote2", author: "author2"),
+    Quote(content: "Quote3", author: "author3"),
   ];
 
   Widget quoteTemplate(quote) {
+    return QuoteCard(quote: quote);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.deepPurple[400],
+      appBar: AppBar(
+        title: Text(
+          "Awesome Quotes",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple[700],
+      ),
+      body: Center(
+        child: Column(
+          children: quotes.map((quote) => quoteTemplate(quote)).toList(),
+        ),
+      )
+    );
+  }
+}
+
+class QuoteCard extends StatelessWidget {
+  final Quote quote;
+
+  QuoteCard({ required this.quote });
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
       color: Colors.deepPurple[500],
       elevation: 5.0,
@@ -48,29 +82,6 @@ class _QuoteListState extends State<QuoteList> {
           ],
         ),
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.deepPurple[400],
-      appBar: AppBar(
-        title: Text(
-          "Awesome Quotes",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 25,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple[700],
-      ),
-      body: Center(
-        child: Column(
-          children: quotes.map((quote) => quoteTemplate(quote)).toList(),
-        ),
-      )
     );
   }
 }
